@@ -4,8 +4,9 @@ interface CounterAppProps {
   value: number;
 }
 
-export const CounterApp = ({ value }: CounterAppProps) => {
-  const [counter, setCounter] = useState(value);
+export const CounterApp = () => {
+    const [value,setValue] = useState(0);
+    const [counter, setCounter] = useState(value);
 
 //   const handleChange = (type?: "increase" | "decrease") => {
 //     if (type === "increase") {
@@ -28,6 +29,15 @@ const handleReset = () => setCounter(value);
       <button onClick={() =>handleIncrease()}>+1</button>
       <button onClick={() => handleDecrease()}>-1</button>
       <button onClick={() =>handleReset()}>reset</button>
+      <input 
+      type="number"
+      value={value}
+      onChange={(e)=>{
+        const newValue= Number(e.target.value);
+        setValue(newValue);
+        setCounter(newValue);
+      }}/>
+
     </>
   );
 };
