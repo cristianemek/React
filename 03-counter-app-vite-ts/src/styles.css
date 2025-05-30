@@ -20,7 +20,10 @@ box-shadow: 0 4px 14px rgba(79, 140, 255, 0.2);
 transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 outline: none;
 margin: 8px 0;
-width: 200px;
+width: 100px;
+display: inline-flex;
+justify-content: center;
+margin-right: 12px;
 }
 
 button:hover {
