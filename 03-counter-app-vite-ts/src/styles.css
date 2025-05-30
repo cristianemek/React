@@ -4,4 +4,33 @@ html,body{
     font-family: helvetica,arial,sans-serif;
     font-size: 1.3rem;
     padding: 70px;
+    text-align: center;
+}
+
+button {
+background-color: #4f8cff;
+color: #fff;
+border: none;
+border-radius: 8px;
+padding: 12px 28px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+box-shadow: 0 4px 14px rgba(79, 140, 255, 0.2);
+transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+outline: none;
+margin: 8px 0;
+width: 200px;
+}
+
+button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(79, 140, 255, 0.3);
+}
+
+button:active {
+    background-color: #1e40af;
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
 }
