@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-interface CounterAppProps {
-  value: number;
-}
+// interface CounterAppProps {
+//   value: number;
+// }
 
 export const CounterApp = () => {
     const [value,setValue] = useState(0);
@@ -36,8 +36,8 @@ const handleReset = () => setCounter(value);
         const newValue= Number(e.target.value);
         setValue(newValue);
         setCounter(newValue);
-      }}/>
-
+      }}
+      />
     </>
   );
 };
