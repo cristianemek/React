@@ -9,6 +9,7 @@ export const FirstApp = ({tittle="titulo",subtittle}: Props )=> {
         <h1>{tittle}</h1>
       {/* <h1>{JSON.stringify(newMessage)}</h1> */}
       <p>{subtittle}</p>
+      <p>{subtittle}</p>
     </>
   );
 };
