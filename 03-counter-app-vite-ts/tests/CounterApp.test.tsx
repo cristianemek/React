@@ -20,10 +20,11 @@ describe('pruebas en CounterApp', () => {
 
      })
 
-     test('debe de decrementar con el boton -1', () => { 
+     test('debe de decrementar con el boton -1', () => {
         render(<CounterApp />);
-        fireEvent.click(screen.getByText('-1'))
-        expect(screen.getAllByText('-1')).toBeTruthy();
+        fireEvent.click(screen.getByText('-1'));
+        const contador = screen.getByRole('heading', { level: 2 });
+        expect(contador.textContent).toBe('-1');
 
      })
 
