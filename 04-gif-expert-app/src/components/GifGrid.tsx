@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { getGifs } from "../helpers/getGifs"
 
 interface GridProps{
     category:string
@@ -5,6 +7,11 @@ interface GridProps{
 
 export const GifGrid = ({category}:GridProps) => {
 
+  
+  useEffect(() => {
+    getGifs(category);
+  }, [])
+  
 
   return (
     <>
