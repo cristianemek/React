@@ -1,15 +1,11 @@
 
-import type { GifImageProps } from './GifGrid';
+import type { GifImageProps } from '../interfaces/gridInterfaces';
 
-export const GifItem = ({url}:GifImageProps) => {
-
-console.log()
-   
-;
+export const GifItem = ({url,title}:GifImageProps) => {
     return (
-    <div className=''>
-        <img src={url} />
-        <p></p>
+    <div className='card'>
+        <img src={url} alt={title} />
+        <p>{title}</p>
     </div>
   )
 }
