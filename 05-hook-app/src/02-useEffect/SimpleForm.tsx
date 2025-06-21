@@ -1,59 +1,57 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { Message } from "./Message";
 
 export const SimpleForm = () => {
+  const [formState, setFormState] = useState({
+    username: "user",
+    email: "email@mail.com",
+  });
 
+  const { username, email } = formState;
 
-    const [formState, setFormState] = useState({
-        username: 'user',
-        email: 'email@mail.com'
-    })
+  const onInputChange = ({ target }: any) => {
+    const { name, value } = target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-    const {username,email} = formState;
+  useEffect(() => {
+    console.log("llamada useEffect");
+  }, []);
 
-    const onInputChange = ({target}:any) =>{
-        const {name, value} = target;
-        setFormState({
-            ...formState,
-            [name]:value
-        })
-    }
+  useEffect(() => {
+    console.log("cambió el formulario");
+  }, [formState]);
 
-    useEffect(() => {
-      console.log('llamada useEffect')
-    },[])
-
-     useEffect(() => {
-      console.log('cambió el formulario')
-    },[formState])
-
-    useEffect(() => {
-      console.log('cambió el email')
-    },[email])
-     
-
+  useEffect(() => {
+    console.log("cambió el email");
+  }, [email]);
 
   return (
     <div>
-        <h1>Formulario Simple</h1>
-        <hr />
+      <h1>Formulario Simple</h1>
+      <hr />
 
-        <input 
+      <input
         type="text"
-        className='form-control'
+        className="form-control"
         placeholder={username}
-        name='username'
+        name="username"
         onChange={onInputChange}
-        />
+      />
 
-        <input 
+      <input
         type="text"
-        className='form-control mt-2'
+        className="form-control mt-2"
         placeholder={email}
-        name='email'
+        name="email"
         onChange={onInputChange}
-        />
-    
-    
+      />
+      {
+        (username === 'user' && <Message />)
+      }
     </div>
-  )
-}
+  );
+};
