@@ -3,10 +3,10 @@ import { useEffect } from "react"
 export const Message = () => {
 
     useEffect(() => {
-      console.log("Mensaje montado")
-    
+        window.addEventListener('mousemove', (ev)=>{
+          console.log(ev)
+        })
       return () => {
-        console.log("Mensaje desmontado")
       }
     }, [])
     
