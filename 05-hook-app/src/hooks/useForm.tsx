@@ -13,10 +13,15 @@ export const useForm = (initialForm:FormData) => {
         });
       };
 
+      const onClearForm = () =>{
+        setFormState(initialForm)
+      };
+
 
     return{
         ...formState,
         formState,
         onInputChange,
+        onClearForm,
     }
 }
