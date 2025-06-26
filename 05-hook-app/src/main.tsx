@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { FocusScreen } from './04-useRef/FocusScreen'
+import { Layout } from './05-useLayoutEffect/layout'
 
 createRoot(document.getElementById('root')!).render(
-    <FocusScreen />
+    <Layout />
     
 )
