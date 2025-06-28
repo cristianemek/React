@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCounter } from '../hooks/useCounter'
-import { Small } from './small';
+import { Small } from './Small';
 
 export const Memorize = () => {
 

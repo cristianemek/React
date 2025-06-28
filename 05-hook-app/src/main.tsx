@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Memorize } from "./06-memos/Memorize";
+import { Padre } from "./07-tarea-memo/Padre";
 
 createRoot(document.getElementById("root")!).render(
-    <Memorize />
+    <Padre />    
 );
