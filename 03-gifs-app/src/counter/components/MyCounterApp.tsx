@@ -2,13 +2,13 @@ import { useCounter } from "../hooks/useCounter";
 
 export const MyCounterApp = () => {
 
-    const {counter,increment,decrement,reset} = useCounter(5);
+    const {counter,increment,decrement,reset} = useCounter();
 
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <h1>Coutner: {counter}</h1>
+      <h1>Counter: {counter}</h1>
       <div>
         <button
           onClick={() => {
