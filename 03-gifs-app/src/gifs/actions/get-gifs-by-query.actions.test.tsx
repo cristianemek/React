@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, expectTypeOf, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { getGifsByQuery } from "./get-gifs-by-query.actions";
 import AxiosMockAdapter from "axios-mock-adapter";
 import { giphyApi } from "../api/giphy.api";
