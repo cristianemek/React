@@ -1,3 +1,5 @@
+import * as z from "zod";
+
 interface Todo {
   id: number;
   text: string;
@@ -16,15 +18,44 @@ export type TaskAction =
   | { type: "TOGGLE_TODO"; payload: number }
   | { type: "DELETE_TODO"; payload: number };
 
+const TodoSchema = z.object({
+  id: z.number(),
+  text: z.string(),
+  completed: z.boolean(),
+});
 
-  export const getTasksInitialState=(): TaskState=>{
-    return{
+const TaskStateSchema = z.object({
+  length:z.number(),
+  completed:z.number(),
+  pending:z.number(),
+  todos:z.array(TodoSchema),
+
+});
+
+export const getTasksInitialState = (): TaskState => {
+  const localStorageState = localStorage.getItem("tasks-state");
+
+  if (!localStorageState) {
+    return {
       todos: [],
       completed: 0,
-      pending:0,
-      length:0
-    }
+      pending: 0,
+      length: 0,
+    };
   }
+  const result = TaskStateSchema.safeParse(JSON.parse(localStorageState));
+  if (result.error){
+    console.log(result.error);
+    return {
+      todos: [],
+      completed: 0,
+      pending: 0,
+      length: 0,
+    };
+  }
+
+  return result.data;
+};
 
 export const taskReducer = (
   state: TaskState,
@@ -41,8 +72,8 @@ export const taskReducer = (
       return {
         ...state,
         todos: [...state.todos, newTodo],
-        length: state.todos.length +1,
-        pending: state.pending +1,
+        length: state.todos.length + 1,
+        pending: state.pending + 1,
       };
     }
     case "TOGGLE_TODO": {
@@ -56,19 +87,22 @@ export const taskReducer = (
       return {
         ...state,
         todos: updatedTodos,
-        completed: updatedTodos.filter(todo => todo.completed).length,
-        pending: updatedTodos.filter(todo => !todo.completed).length
+        completed: updatedTodos.filter((todo) => todo.completed).length,
+        pending: updatedTodos.filter((todo) => !todo.completed).length,
       };
     }
-    case "DELETE_TODO":{
-        const currentTodos= state.todos.filter((todo) => todo.id !== action.payload);
+    case "DELETE_TODO": {
+      const currentTodos = state.todos.filter(
+        (todo) => todo.id !== action.payload
+      );
       return {
         ...state,
         todos: currentTodos,
         length: currentTodos.length,
-        completed: currentTodos.filter(todo => todo.completed).length,
-        pending: currentTodos.filter(todo => !todo.completed).length
-      };}
+        completed: currentTodos.filter((todo) => todo.completed).length,
+        pending: currentTodos.filter((todo) => !todo.completed).length,
+      };
+    }
 
     default:
       return state;
