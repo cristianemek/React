@@ -21,6 +21,7 @@ export const usePokemon = ({id}:Props) => {
         setIsLoading(true);
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const data= await response.json();
+        console.log(response)
 
         setPokemon({
             id:id,
