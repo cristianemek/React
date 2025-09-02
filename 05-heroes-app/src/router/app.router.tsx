@@ -5,7 +5,10 @@ import { AdminLayout } from "@/admin/pages/layouts/AdminLayout";
 import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
 import { HeroPage } from "@/heroes/pages/hero/HeroPage";
 import { HomePage } from "@/heroes/pages/HomePage";
-import { SearchPage } from "@/heroes/pages/search/SearchPage";
+import { lazy } from "react";
+// import { SearchPage } from "@/heroes/pages/search/SearchPage";
+
+const SearchPage = lazy(()=> import('@/heroes/pages/search/SearchPage'));
 
 export const appRouter = createBrowserRouter([
   {
