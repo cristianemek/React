@@ -1,22 +1,12 @@
 import {
   Heart,
-  Zap,
-  Eye,
-  Brain,
-  Gauge,
-  Shield,
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron";
 import { HeroStats } from "../components/HeroStats";
 import { HeroGrid } from "../components/HeroGrid";
+import { CustomPagination } from "@/components/custom/CustomPagination";
+import { CustomBreadcrumb } from "@/components/custom/CustomBreadcrumb";
 
 export const HomePage = () => {
   return (
@@ -27,6 +17,8 @@ export const HomePage = () => {
         title="Universo de SuperHéroes"
         description="Descrube, explora y administra super héroes y villanos"
        />
+
+       <CustomBreadcrumb currentPage="Super Héroes"/>
 
         {/* Stats Dashboard */}
         <HeroStats />
@@ -48,30 +40,7 @@ export const HomePage = () => {
       <HeroGrid />
 
         {/* Pagination */}
-        <div className="flex items-center justify-center space-x-2">
-          <Button variant="outline" size="sm" disabled>
-            <ChevronLeft className="h-4 w-4" />
-            Previous
-          </Button>
-
-          <Button variant="default" size="sm">
-            1
-          </Button>
-          <Button variant="outline" size="sm">
-            2
-          </Button>
-          <Button variant="outline" size="sm">
-            3
-          </Button>
-          <Button variant="ghost" size="sm" disabled>
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-
-          <Button variant="outline" size="sm">
-            Next
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
+        <CustomPagination totalPages={8}/>
       </>
     </>
   );
