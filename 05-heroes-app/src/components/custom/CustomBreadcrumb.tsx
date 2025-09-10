@@ -1,12 +1,12 @@
-import { SlashIcon } from "lucide-react";
+import { SlashIcon } from 'lucide-react';
 import {
   Breadcrumb,
-  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbSeparator,
-} from "../ui/breadcrumb";
-import { Link } from "react-router";
+} from '../ui/breadcrumb';
+import { Link } from 'react-router';
 
 interface Breadcrumb {
   label: string;
@@ -15,10 +15,10 @@ interface Breadcrumb {
 
 interface Props {
   currentPage: string;
-  breadCrumbs?: Breadcrumb[];
+  breadcrumbs?: Breadcrumb[];
 }
 
-export const CustomBreadcrumb = ({ currentPage, breadCrumbs = [] }: Props) => {
+export const CustomBreadcrumb = ({ currentPage, breadcrumbs = [] }: Props) => {
   return (
     <Breadcrumb className="my-5">
       <BreadcrumbList>
@@ -28,25 +28,25 @@ export const CustomBreadcrumb = ({ currentPage, breadCrumbs = [] }: Props) => {
           </BreadcrumbLink>
         </BreadcrumbItem>
 
-        {breadCrumbs.map((crumb) => (
+        {breadcrumbs.map((crumb) => (
           <div className="flex items-center">
             <BreadcrumbItem>
               <BreadcrumbSeparator>
                 <SlashIcon />
               </BreadcrumbSeparator>
-
               <BreadcrumbLink asChild>
                 <Link to={crumb.to}>{crumb.label}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
           </div>
         ))}
+
         <BreadcrumbSeparator>
           <SlashIcon />
         </BreadcrumbSeparator>
 
         <BreadcrumbItem>
-          <BreadcrumbLink>{currentPage}</BreadcrumbLink>
+          <BreadcrumbLink className="text-black">{currentPage}</BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

@@ -7,8 +7,23 @@ import { HeroStats } from "../components/HeroStats";
 import { HeroGrid } from "../components/HeroGrid";
 import { CustomPagination } from "@/components/custom/CustomPagination";
 import { CustomBreadcrumb } from "@/components/custom/CustomBreadcrumb";
+// import { useEffect } from "react";
+import { getHeroesByPageAction } from "../actions/get-heroes-by-page.action";
+import { useQuery } from "@tanstack/react-query";
 
 export const HomePage = () => {
+
+  // useEffect(() => {
+  //   getHeroesByPage().then()
+  // }, [])
+  
+
+  const {data} = useQuery({
+    queryKey:['heroes'],
+    queryFn: () => getHeroesByPageAction(),
+    staleTime: 1000*60*5,
+  });
+
   return (
     <>
       <>
