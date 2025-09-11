@@ -9,9 +9,10 @@ const queryClient = new QueryClient();
 export const HeroesApp = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <FavouriteHeroProvider />
+      <FavouriteHeroProvider>
       <RouterProvider router={appRouter} />
       <ReactQueryDevtools initialIsOpen={false} />
+      </FavouriteHeroProvider>
     </QueryClientProvider>
   );
 };
