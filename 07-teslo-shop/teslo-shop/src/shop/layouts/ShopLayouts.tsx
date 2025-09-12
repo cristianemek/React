@@ -1,6 +1,9 @@
+import { Outlet } from "react-router"
 
 export const ShopLayouts = () => {
   return (
-    <div>ShopLayouts</div>
+    <div>ShopLayouts
+      <Outlet />
+    </div>
   )
 }
