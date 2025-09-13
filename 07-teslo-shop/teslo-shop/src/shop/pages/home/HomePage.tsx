@@ -6,11 +6,11 @@ import { ProductsGrid } from "@/shop/components/ProductsGrid";
 export const HomePage = () => {
   return (
     <div>
-     <CustomJumbotron title="Todos los productos" subTitle=""/>
+      <CustomJumbotron title="Todos los productos" subTitle="" />
 
-    <ProductsGrid products={products}/>
+      <ProductsGrid products={products} />
 
-     <CustomPagination totalPages={10}/>
+      <CustomPagination totalPages={10} />
     </div>
   );
 };
