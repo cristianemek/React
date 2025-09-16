@@ -1,20 +1,32 @@
-import { tesloApi } from "@/api/tesloApi"
+import { tesloApi } from "@/api/tesloApi";
 import type { ProductResponse } from "@/interfaces/products.response";
 
-export const getProductsAction = async():Promise<ProductResponse> => {
-
-    const {data} = await tesloApi.get<ProductResponse>('/products');
-
-    const productsWithImageUrls = data.products.map(product => ({
-        ...product,
-        images: product.images.map(imagen=>
-            `${import.meta.env.VITE_API_URL}/files/product/${imagen}`
-        )
-    }))
-
-
-    return {
-        ...data,
-        products:productsWithImageUrls,
-    };
+interface Options {
+  limit?: number | string;
+  offset?: number | string;
 }
+
+export const getProductsAction = async (
+  options: Options
+): Promise<ProductResponse> => {
+  const { limit, offset } = options;
+
+  const { data } = await tesloApi.get<ProductResponse>("/products", {
+    params:{
+        limit,
+        offset,
+    },
+  });
+
+  const productsWithImageUrls = data.products.map((product) => ({
+    ...product,
+    images: product.images.map(
+      (imagen) => `${import.meta.env.VITE_API_URL}/files/product/${imagen}`
+    ),
+  }));
+
+  return {
+    ...data,
+    products: productsWithImageUrls,
+  };
+};

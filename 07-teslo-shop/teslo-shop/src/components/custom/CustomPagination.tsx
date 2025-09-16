@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const CustomPagination = ({ totalPages }: Props) => {
-
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage = searchParams.get('page') ?? '1';
   const page = isNaN(+queryPage) ? 1 : +queryPage;

@@ -16,7 +16,7 @@ return (
 
       <ProductsGrid products={data?.products || []} />
 
-      <CustomPagination totalPages={10} />
+      <CustomPagination totalPages={data?.pages || 0} />
     </div>
   );
 }
