@@ -5,8 +5,6 @@ import { TesloShopApp } from './TesloShopApp'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <TesloShopApp>
-      
-    </TesloShopApp>
+    <TesloShopApp />
   </StrictMode>,
 )

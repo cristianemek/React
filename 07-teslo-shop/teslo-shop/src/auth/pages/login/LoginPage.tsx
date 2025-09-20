@@ -1,17 +1,19 @@
+import { useState, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
+
+import { CustomLogo } from "@/components/custom/CustomLogo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CustomLogo } from "@/components/custom/CustomLogo";
-import { Link, useNavigate } from "react-router";
-import { useState, type FormEvent } from "react";
-import { loginAction } from "@/shop/actions/login.action";
-import { toast } from "sonner";
+
+import { useAuthStore } from "@/auth/store/auth.store";
 
 export const LoginPage = () => {
-
   const navigate = useNavigate();
   const [isPosting, setIsPosting] = useState(false);
+  const { login } = useAuthStore();
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,16 +23,14 @@ export const LoginPage = () => {
     const email = formData.get("email") as string;
     const password = formData.get("passwd") as string;
 
-    try {
-      const data = await loginAction(email,password);
-      localStorage.setItem('token',data.token);
-      navigate('/')
-    } catch (error) {
-      toast.error('Correo o contraseña no válido')
+    const isValid = await login(email, password);
+    if (isValid) {
+      navigate("/");
+      return;
     }
 
+    toast.error("Correo o contraseña no válido");
     setIsPosting(false);
-
   };
 
   return (

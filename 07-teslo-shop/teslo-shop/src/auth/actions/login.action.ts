@@ -1,5 +1,5 @@
 import { tesloApi } from "@/api/tesloApi";
-import type { AuthResponse } from "../interfaces/auth.response";
+import type { AuthResponse } from "../../shop/interfaces/auth.response";
 
 export const loginAction = async (
   email: string,
