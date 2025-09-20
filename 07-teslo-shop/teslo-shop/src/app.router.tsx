@@ -24,7 +24,7 @@ export const appRouter = createBrowserRouter([
             element: <HomePage />
         },
         {
-            path: 'prodcut/:idSlug',
+            path: 'product/:idSlug',
             element: <ProductPage />
         },
         {
