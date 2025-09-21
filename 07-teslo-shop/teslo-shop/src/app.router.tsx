@@ -9,70 +9,81 @@ import { DashBoardPage } from "./admin/pages/dashboard/DashBoardPage";
 import { AdminProductsPage } from "./admin/pages/products/AdminProductsPage";
 import { AdminProductPage } from "./admin/pages/product/AdminProductPage";
 import { lazy } from "react";
+import {
+  AdminRoute,
+NotAuthenticatedRoute,
+} from "./components/routes/ProtectedRoutes";
 
-const AuthLayout = lazy(()=> import('./auth/layouts/AuthLayout'));
-const AdminLayout = lazy(()=> import('./admin/layouts/AdminLayout'));
-
+const AuthLayout = lazy(() => import("./auth/layouts/AuthLayout"));
+const AdminLayout = lazy(() => import("./admin/layouts/AdminLayout"));
 
 export const appRouter = createBrowserRouter([
-    {
-        path: '/',
-        element: <ShopLayouts />,
-        children:[
-        {  
-            index:true,
-            element: <HomePage />
-        },
-        {
-            path: 'product/:idSlug',
-            element: <ProductPage />
-        },
-        {
-            path: 'gender/:gender',
-            element: <GenderPage />
-        },
-        ],
-    },
+  {
+    path: "/",
+    element: <ShopLayouts />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "product/:idSlug",
+        element: <ProductPage />,
+      },
+      {
+        path: "gender/:gender",
+        element: <GenderPage />,
+      },
+    ],
+  },
 
-    {
-        path: '/auth',
-        element: <AuthLayout />,
-        children:[
-        {
-            index:true,
-            element: <Navigate to='/auth/login' />
-        },
-        {  
-            path: 'login',
-            element: <LoginPage />
-        },
-        {  
-            path: 'register',
-            element: <RegisterPage />
-        },
-        ],
-    },
+  {
+    path: "/auth",
+    element: (
+      <NotAuthenticatedRoute>
+        <AuthLayout />
+      </NotAuthenticatedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/auth/login" />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+    ],
+  },
 
-    {
-        path: '/admin',
-        element: <AdminLayout />,
-        children: [
-        {
-            index:true,
-            element: <DashBoardPage />
-        },
-        {
-            path:'products',
-            element: <AdminProductsPage />
-        },
-        {
-            path:'products/:id',
-            element: <AdminProductPage />
-        },
-    ]
-    },
-    {
-        path:'*',
-        element: <Navigate to='/' />
-    }
-])
+  {
+    path: "/admin",
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <DashBoardPage />,
+      },
+      {
+        path: "products",
+        element: <AdminProductsPage />,
+      },
+      {
+        path: "products/:id",
+        element: <AdminProductPage />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
+  },
+]);
