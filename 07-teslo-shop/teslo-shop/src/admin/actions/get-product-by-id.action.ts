@@ -1,0 +1,40 @@
+import { tesloApi } from "@/api/tesloApi";
+import type { Product } from "@/interfaces/product.interface";
+
+
+
+export const getProductByIdAction = async(id:string):Promise<Product> => {
+
+    if (!id) throw new Error('Id is required');
+
+    if (id==='new'){
+        return {
+            id: '',
+            title: '',
+            price: 0,
+            description: '',
+            images: [],
+            stock: 0,
+            slug: '',
+            tags: [],
+            gender: "men",
+            sizes: [],
+        } as unknown as Product;
+    }
+
+    const {data} = await tesloApi.get<Product>(`/products/${id}`);
+
+    const images = data.images.map(image =>{
+        if(image.includes('http')) return image;
+        return `${import.meta.env.VITE_API_URL}/files/product/${image}`
+    });
+
+    return{
+        ...data,
+        images,
+    }
+
+}
+
+
+
