@@ -11,13 +11,21 @@ interface Props {
   title: string;
   subTitle: string;
   product: Product;
+  isPending: boolean;
+
+  onSubmit: (productLike: Partial<Product> & {files?: File[]} ) => Promise<void>;
 }
 
 const availableSizes: Size[] = ["XS", "S", "M", "L", "XL", "XXL"];
 
-export const ProductForm = ({ title, subTitle, product }: Props) => {
+interface FormInputs extends Product {
+  files?: File[]
+}
+
+export const ProductForm = ({ title, subTitle, product,onSubmit,isPending }: Props) => {
 
   const labelInputRef = useRef<HTMLInputElement>(null)
+  const [files, setFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const {
     register,
@@ -26,7 +34,7 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
     getValues,
     setValue,
     watch,
-  } = useForm({
+  } = useForm<FormInputs>({
     defaultValues: product,
   });
 
@@ -76,31 +84,36 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
     e.stopPropagation();
     setDragActive(false);
     const files = e.dataTransfer.files;
-    console.log(files);
+    if (!files) return
+
+    const currentFiles = getValues('files') || [];
+    setValue('files',[...currentFiles,...Array.from(files)])
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    console.log(files);
+    if(!files) return
+
+    setFiles((prev)=> [...prev, ...Array.from(files)])
   };
 
-  const onSubmit = (productLike: Product) => {
-    console.log("Producto", productLike);
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-between items-center">
         <AdminTitle title={title} subtitle={subTitle} />
         <div className="flex justify-end mb-10 gap-4">
-          <Button variant="outline">
+          <Button variant="outline" type="button">
             <Link to="/admin/products" className="flex items-center gap-2">
               <X className="w-4 h-4" />
               Cancelar
             </Link>
           </Button>
 
-          <Button>
+          <Button
+          type="submit"
+          disabled={isPending}
+          >
             <SaveAll className="w-4 h-4" />
             Guardar cambios
           </Button>
@@ -420,6 +433,25 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
                       </p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* Imagenes por cargar */}
+              <div className="mt-6 space-y-3">
+                <h3 className="text-sm font-medium text-slate-700">
+                  Imágenes por cargar
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                 {
+                  files.map((file,index)=>(
+                    <img
+                          src={URL.createObjectURL(file)}
+                          key={index}
+                          alt="Product"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                  ))
+                 }
                 </div>
               </div>
             </div>
